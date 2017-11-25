@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" />
+<style>
+/*分页*/
+.pager {
+    margin: 15px;
+    float:right;
+}
+.pager li {
+    display: inline-block;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    padding: 9px 13px;
+}
+.pager li.active {
+    border: 1px solid transparent;
+    background: transparent;
+}
+.pager li.active a {
+    color: #e4393c;
+    cursor: default;
+}.pager {
+     margin: 15px auto 0;
+ }
+.pager li {
+    display: inline-block;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    padding: 5px 10px;
+}
+.pager li.active {
+    border: 1px solid transparent;
+    background: transparent;
+}
+.pager li a{
+	display: inline-block;
+	width:15px;
+	height:18px;
+}
+.pager li.active a{
+    color: #e4393c;
+    cursor: pointer;
+}
+</style>
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+    
+    	<ul class="toolbar">
+        <li class="click"><span><img src="images/t01.png" /></span><a href="form.html">添加</a></li>
+        <!--<li class="click"><span><img src="images/t02.png" /></span>修改</li>
+        <li><span><img src="images/t03.png" /></span>删除</li>-->
+        </ul>
+    
+    </div>
+    
+    
+    <table class="tablelist">
+    	<thead>
+    	<tr>
+        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th>编号</th>
+        <th>标题</th>
+        <th>用户</th>
+        <th>籍贯</th>
+        <th>发布时间</th>
+        <th>是否审核</th>
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="mlist">
+        </tbody>
+    </table>
+   
+		<ol class="pager" id="pager1">
+		</ol>
+    </div>
+	<script  src="js/jquery-1.11.3.js"></script>
+	<script  src="js/mycf.js"></script>
+</body>
+
+</html>

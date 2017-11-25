@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>欢迎登录后台管理系统</title>
+<link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body style="background-color:#1c77ac; background-image:url(images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+    <div id="mainBody">
+      <div id="cloud1" class="cloud"></div>
+      <div id="cloud2" class="cloud"></div>
+    </div>
+<div class="logintop">    
+    <span>欢迎登录后台管理界面平台</span>    
+    <ul>
+    <li><a href="#">回首页</a></li>
+    <li><a href="#">帮助</a></li>
+    <li><a href="#">关于</a></li>
+    </ul>    
+    </div>
+    <div class="loginbody">
+    <span class="systemlogo"></span>
+    <div class="loginbox">
+    <form id="login_form"  onsubmit="submitForm()">
+		<ul>
+			<li><p class="alert"></p></li>
+			<li><input name="uname" type="text"  class="loginuser" placeholder="请输入用户名" ></li>
+			<li><input name="upwd" type="password"  class="loginpwd" placeholder="请输入密码" ></li>
+			<li><input  id="bt_login" type="button" class="loginbtn" value="登录">
+                <label><input id="isrem" type="checkbox" id="isrem" checked/>记住用户名</label></li>
+		</ul>
+   </form>
+   </div>
+    </div>
+    <div class="loginbm">个人版权所有© 2016</div>
+    <script  src="js/jquery-1.11.3.js"></script>
+	<!--<script	 src="js/mycf.js"></script>-->
+	<script	 src="js/login.js"></script>
+    <script>
+        //TODO 当页面加载完毕后,检查是否存储用户信息
+        window.onload = function(){
+            var user = window.sessionStorage.getItem("user");
+            if(user){//TODO 存储用户信息
+                var json = JSON.parse(user);
+                var userEle = document.getElementById("loginuser");
+                userEle.value = json.user;
+            }
+        }
+        //TODO 封装函数 - 在提交表单调用
+        function submitForm(){
+            //TODO 判断用户是否勾选了"记住用户名和密码"
+            var isrem = document.getElementById("isrem");
+            if(isrem.checked){//TODO 勾选
+                var user = document.getElementById("loginuser").value;
+                var json = {
+                    "user" : user
+                }
+                var jsonString = JSON.stringify(json);
+                window.sessionStorage.setItem('user',jsonString);
+            }
+        }
+    </script>
+</body>
+</html>

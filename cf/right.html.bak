@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/pagination.css"/>
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">数据表</a></li>
+    <li><a href="#">基本内容</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+    
+    	<ul class="toolbar">
+        <li class="click"><span><img src="images/t01.png" /></span><a href="form.html">添加</a></li>
+        <!--<li class="click"><span><img src="images/t02.png" /></span>修改</li>
+        <li><span><img src="images/t03.png" /></span>删除</li>-->
+        </ul>
+    
+    </div>
+    
+    
+    <table class="tablelist" id="listData">
+    	<thead>
+    	<tr>
+        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th>编号</th>
+        <th>标题</th>
+        <th>用户</th>
+        <th>籍贯</th>
+        <th>发布时间</th>
+        <th>是否审核</th>
+        <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="mlist">
+        </tbody>
+    </table>
+   
+<!--
+		<ol class="pager" id="pager1"></ol>
+-->
+        <div id="Pagination" class="pagination">
+			<span >2121</span>
+		</div>
+    </div>
+	<script  src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery.pagination.js"></script>
+    <script type="text/javascript">
+        //分页查询开始
+        $(function() {
+            getDataList(0, null);
+
+        });
+        //var rows = 10;
+        var page = 0;
+        var initFlag = true;
+
+        function getDataList(currPage, jg) {
+
+            $.ajax({
+                url : "data/right.php",
+                type : "post",
+                dataType : 'json',
+                data : {/*rows:rows,*/pno : currPage+1},
+                //contentType : "application/x-www-form-urlencoded; charset=utf-8",
+                success : function(response) {
+                    console.log(response);
+                            if (initFlag) {
+                                $("#Pagination").pagination(
+                                        response.recordCount,
+                                        {
+                                           /*items_per_page : rows,*/
+/*                                            num_edge_entries : 1,
+                                            num_display_entries : 10,*/
+                                            callback : getDataList//回调函数
+                                        });
+                                initFlag = false;
+                            }
+                            //$("#listData").html("");
+                            //loadDataList(response.data);
+                            var html = '';
+                            $.each(response.data, function(i,p){
+                                console.dir(p);
+                                html +=`<tr>
+                                <td><input name="" type="checkbox" value="" /></td>
+                                <td>${p.m_id}</td>
+                                <td>${p.u_title}</td>
+                                <td>${p.u_uname}</td>
+                                <td>${p.m_nation}</td>
+                                <td>${p.create_time}</td>
+                                <td>${p.m_ischeck}</td>
+                                <td>
+                                <a href="data/1upshuju.php?id=${p.m_id}" class="tablelink">修改 </a>
+                                <a href="data/deleshuju.php?id=${p.m_id}" class="tablelink"> 删除</a></td>
+                                </tr>`;
+                            });
+                            $(".tablelist tbody.mlist").html(html);
+                }
+            });
+        }
+
+        /*function loadDataList(listdata) {
+            for (var i = 0; i < listdata.length; i++) {
+                var n = listdata[i];
+                var html = "<tr>"+
+                        "<td>"+"<img src='getphoto?unid="+n.uuid+"' onerror='this.src=\"resources/img/default.png\"' style='width:48px;height:48px;border-radius:48px;'/>"+"</td>"+
+                        "<td>"+n.username+"</td>"+
+                        "<td>"+n.password+"</td>"+
+                        "</tr>";
+                $("#listData").append(html);
+            }
+        }*/
+        //分页查询结束
+    </script>
+</body>
+</html>

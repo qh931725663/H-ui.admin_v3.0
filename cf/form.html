@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>无标题文档</title>
+<link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">表单</a></li>
+    </ul>
+    </div>
+    
+    <div class="formbody">
+    
+    <div class="formtitle"><span>基本信息</span></div>
+    <form id="adarticle">
+    <ul class="forminfo">
+    <li><label>文章标题</label><input name="title" id="title" class="dfinput" required/>
+	<li><label>用户</label><input name="user" id="user" class="dfinput" required/>
+	<li><label>籍贯</label><select name="nation" id="nation" class="dfinput">
+	<option>中国</option>
+	<option>美国</option>
+	<option>英国</option>
+	<option>德国</option>
+	</select>
+    <li><label>是否审核</label><cite><input name="ischeck"  type="radio"  checked="checked" value="是"/>是&nbsp;&nbsp;&nbsp;&nbsp;<input name="ischeck" id="ischeck" type="radio" value="否"/>否</cite></li>
+    <li><label>文章内容</label><textarea name="article" id="article" cols="" rows="" class="textinput"></textarea></li>
+    <li><label>&nbsp;</label><input id="tjbtn"  type="button" class="btn" value="添加数据"/></li>
+    </ul>  
+	</form>
+    </div>
+	 <script  src="js/jquery-1.11.3.js"></script>
+	 <script  src="js/mycf.js"></script>
+	</body>	
+</html>

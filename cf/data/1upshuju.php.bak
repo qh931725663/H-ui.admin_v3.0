@@ -1,0 +1,56 @@
+<?php
+/**根据客户端提交的pid查找商品**/
+//1 接收客户端提交的PID
+
+ $id=$_REQUEST['id'];
+include('init.php');
+  $conn=mysqli_connect($host,$aname,$apwd,$dbname,$port);
+  $sql = "SET NAMES UTF8";
+  mysqli_query($conn,$sql);
+
+$sql = "SELECT * FROM cf_message WHERE m_id=$id";
+$result = mysqli_query($conn, $sql);
+
+//4 读取查询结果——一行记录无需循环
+$p = mysqli_fetch_assoc($result);
+?>
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> </title>
+  <meta charset="utf-8"/>
+  <link href="../css/style.css" rel="stylesheet" />
+  <style>
+	#tjbtn{
+	width:50px;
+	height:20px;
+	background:#ddd;
+	}
+  </style>
+ </head>
+
+ <body>
+  <h1 style="font-size:20px;">修改商品信息</h1> 
+
+	<div class="formbody">
+	  <div class="formtitle"><span>基本信息</span></div>
+    <form  action="upshuju.php">
+    <ul class="forminfo">
+	<!--注意此处的隐藏字段-->
+	<li><input type="hidden" name="id" value="<?php echo $p['m_id']?>"></li>
+    <li><label>文章标题:</label><input name="title" id="title" class="dfinput" value="<?php echo $p['u_title'] ?>" required/>
+	<li><label>用户:</label><input name="user" id="user" class="dfinput" value="<?php echo $p['u_uname'] ?>" required/>
+	<li><label>籍贯:</label><select name="nation" id="nation" value="<?php echo $p['m_nation'] ?>" class="dfinput">
+	<option>中国</option>
+	<option>美国</option>
+	<option>英国</option>
+	<option>德国</option>
+	</select>
+    <li><label>是否审核:</label><cite><input name="ischeck" value="<?php echo $p['m_ischeck'] ?>" type="radio"  checked="checked" value="是"/>是&nbsp;&nbsp;&nbsp;&nbsp;<input name="ischeck" value="<?php echo $p['m_ischeck'] ?>" id="ischeck" type="radio" value="否"/>否</cite></li>
+    <li><label>文章内容:</label><textarea name="article"  id="article" cols="" rows="" class="textinput"><?php echo $p['m_article'] ?></textarea></li>
+    <li><label>&nbsp;</label><input id="tjbtn"  type="submit"  value="修改信息"/></li>
+    </ul>  
+	</form>
+    </div>
+ </body>
+</html>

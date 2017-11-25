@@ -1,0 +1,24 @@
+<?php
+ header("content-type:text/plain;charset=utf8");
+ $title=$_REQUEST['title'];
+ $user=$_REQUEST['user'];
+ $nation=$_REQUEST['nation'];
+ $create_time=date("y-m-d H:i:s");
+ $ischeck=$_REQUEST['ischeck'];
+ $article=$_REQUEST['article'];
+
+ include('init.php');
+ $conn=mysqli_connect($host,$aname,$apwd,$dbname,$port);
+ $sql = "SET NAMES UTF8";
+ mysqli_query($conn,$sql);
+
+ $sql="INSERT INTO cf_message(m_id, u_title,u_uname, m_nation, create_time,m_ischeck,m_article) 
+		VALUES(null, '$title','$user', '$nation', '$create_time','$ischeck','$article')";
+ //echo $sql;
+ $result=mysqli_query($conn,$sql);
+
+if($result===FALSE){ //SQL语法错误
+	echo '执行失败！请检查SQL：'.$sql;
+}else {  
+	echo '执行成功';
+	}
